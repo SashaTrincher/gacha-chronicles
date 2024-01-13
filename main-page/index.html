@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Chronicles</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <div class="user">
+        <ul class="user-list">
+            <li class="user-item"></li>
+            <li class="user-item"></li>
+            <li class="user-item"></li>
+        </ul>
+    </div>
+
+    <button id="trigger" onclick="buyCard()">Click Me</button>
+
+    <div class="card-container inactive">
+        <div class="card">
+            <div class="card-front">
+                <div class="character-image">
+                    <img id="characterImg" src="">
+                </div>
+                <div class="title"></div>
+                <div class="stats">
+                    <li class="card-br" id="cardBr"></li>
+                    <li class="card-value" id="cardVl"></li>
+                </div>
+                <div class="rarity"></div>
+            </div>
+            <div class="card-back">
+            </div>
+        </div>
+    </div>
+      
+    <script src="./script.js"></script>
+    <script src="./app.js"></script>
+    <script src="./data.js"></script>
+</body>
+</html>
