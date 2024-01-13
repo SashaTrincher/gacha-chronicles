@@ -178,6 +178,34 @@ function validateCardStructure() {
     });
 };
 
+const cardBr = document.getElementById('cardBr');
+const characterImg = document.getElementById('characterImg');
+const cardTitle = document.querySelector('.title');
+const cardRarity = document.querySelector('.rarity');
+const cardValue = document.getElementById('cardVl');
+const cardContainer = document.querySelector('.card-container');
+const cardFront = document.querySelector('.card-front');
+
+function handleCardChanges(card, rarity) {
+    if (cardContainer.classList.contains('inactive')) {
+        cardContainer.classList.replace('inactive', 'active')
+    };
+
+    cardFront.style.backgroundImage = "url('" + card.bgImageUrl + "')";
+    characterImg.src = card.imageUrl;
+    cardTitle.innerHTML = card.cardName;
+    cardBr.innerHTML = `Battle Rating: ${card.battleRating}`;
+    cardRarity.innerHTML = card.rarity;
+
+    cardRarity.classList.add(rarity);
+    
+    if (card.id.includes('ssr')) {
+        cardValue.innerHTML = `Card's Value: ${cards.ssr.value}`;
+    } else if (card.id.includes('sr')) {
+        cardValue.innerHTML = `Card's Value: ${cards.sr.value}`;
+    }
+}
+
 function findSsrCardById(givenId) {
     validateCardStructure();
 
@@ -238,34 +266,6 @@ function getCardIds(category) {
 
     return cardIds;
 };
-
-const cardBr = document.getElementById('cardBr');
-const characterImg = document.getElementById('characterImg');
-const cardTitle = document.querySelector('.title');
-const cardRarity = document.querySelector('.rarity');
-const cardValue = document.getElementById('cardVl');
-const cardContainer = document.querySelector('.card-container');
-const cardFront = document.querySelector('.card-front');
-
-function handleCardChanges(card, rarity) {
-    if (cardContainer.classList.contains('inactive')) {
-        cardContainer.classList.replace('inactive', 'active')
-    };
-
-    cardFront.style.backgroundImage = "url('" + card.bgImageUrl + "')";
-    characterImg.src = card.imageUrl;
-    cardBr.innerHTML = `Battle Rating: ${card.battleRating}`;
-    cardTitle.innerHTML = card.cardName;
-    cardRarity.innerHTML = card.rarity;
-
-    cardRarity.classList.add(rarity);
-    
-    if (card.id.includes('ssr')) {
-        cardValue.innerHTML = `Card's Value: ${cards.ssr.value}`;
-    } else if (card.id.includes('sr')) {
-        cardValue.innerHTML = `Card's Value: ${cards.sr.value}`;
-    }
-}
 
 let pityCount = 0;
 
