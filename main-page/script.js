@@ -1,11 +1,18 @@
 // © 2024 Trincher Oleksandr
 
+// dom elements 
 const trigger = document.getElementById('trigger');
+
+// variable to extract user profile from localStorage that is defined in /main-page/data.js
 let currentUser = localStorage.getItem('currentUser');
 
+// cards array
+// array consists of keys with cards, which will be put in their co existing rarity, inside the cards key we will find cards with their following cardName, id key works as a indeticator for specific card, 
+// rarity key defines the chance of getting the exact card even after rolling the specific rarity, battleRating key is used to defines the card's battle statistics, imageUrl defines the card's character image and the bgImageUrl defines the 
+// card's background image
 const cards = {
-    sr: {
-        value: 50,
+    sr: { // sr rarity cards 
+        value: 50, 
         cards: {
             chopper: {
                 cardName: 'Chopper Pre-TS',
@@ -41,7 +48,7 @@ const cards = {
             },
         },     
     },
-    ssr: {
+    ssr: { // ssr rarity cards
         value: 500,
         cards: {
             luffy: {
@@ -117,8 +124,8 @@ const cards = {
             },
         },
     },
-    ur: {
-        value: 2000,
+    ur: { // ur raities cards
+        value: 2000, // card value
         cards: {
             luffyUr: {
                 cardName: 'Luffy Gear 5',
@@ -132,8 +139,8 @@ const cards = {
     },
 };
 
+// function to set cards array to localStorage
 let cardsStorage = JSON.stringify(cards);
-
 window.addEventListener('load', () => {
     localStorage.setItem('cardsData', cardsStorage);
 
@@ -142,6 +149,7 @@ window.addEventListener('load', () => {
 
 validateCardStructure();
 
+// function to validate the structure of cards array
 function validateCardStructure() {
     const categories = ['sr', 'ssr', 'ur'];
 
@@ -158,26 +166,27 @@ function validateCardStructure() {
                     typeof card.rarity !== 'string' ||
                     (card.percentage && typeof card.percentage !== 'string')) {
                     throw new Error(`Invalid data type in ${category} for card ${card.id}`);
-                }
+                } // checks for cardName key to be a string, else throws an error
 
                 if (typeof card.battleRating !== 'number') {
                     throw new Error(`battleRating must be a number in card ${card.id}`);
-                }
+                } // checks for battleRating key to be a number, else throws an error
 
                 if (seenCardNames.has(card.cardName)) {
                     throw new Error(`Duplicate cardName found in ${category}: ${card.cardName}`);
-                }
+                } // checks if different cards has matching cardName, if does throws an error
                 seenCardNames.add(card.cardName);
 
                 if (seenCardIds.has(card.id)) {
                     throw new Error(`Duplicate id found in ${category}: ${card.id}`);
-                }
+                } // checks if different cards has matching ids, if does throws an error
                 seenCardIds.add(card.id);
             }
         }
     });
 };
 
+// dom elements of card element
 const cardBr = document.getElementById('cardBr');
 const characterImg = document.getElementById('characterImg');
 const cardTitle = document.querySelector('.title');
@@ -186,26 +195,29 @@ const cardValue = document.getElementById('cardVl');
 const cardContainer = document.querySelector('.card-container');
 const cardFront = document.querySelector('.card-front');
 
+// function to handle changes after the card was rolled
 function handleCardChanges(card, rarity) {
     if (cardContainer.classList.contains('inactive')) {
         cardContainer.classList.replace('inactive', 'active')
-    };
+    }; // switches card visibility after it was rolled, inactive class set's element's style to display: none; and active switches it to display: block;
 
     cardFront.style.backgroundImage = "url('" + card.bgImageUrl + "')";
     characterImg.src = card.imageUrl;
-    cardTitle.innerHTML = card.cardName;
-    cardBr.innerHTML = `Battle Rating: ${card.battleRating}`;
+    cardTitle.innerHTML = card.cardName; 
+    cardBr.innerHTML = `Battle Rating: ${card.battleRating}`; 
     cardRarity.innerHTML = card.rarity;
 
     cardRarity.classList.add(rarity);
-    
+
+    // switches card's value element to corresponding cards.rarity.value
     if (card.id.includes('ssr')) {
         cardValue.innerHTML = `Card's Value: ${cards.ssr.value}`;
     } else if (card.id.includes('sr')) {
         cardValue.innerHTML = `Card's Value: ${cards.sr.value}`;
     }
-}
+};
 
+// function to run through the array with ssr rairty cards and find card with corresponding givenId
 function findSsrCardById(givenId) {
     validateCardStructure();
 
@@ -222,6 +234,7 @@ function findSsrCardById(givenId) {
     return null;
 }
 
+// function to run through the array with sr rairty cards and find card with corresponding givenId
 function findSrCardById(givenId) {
     validateCardStructure();
 
@@ -238,12 +251,9 @@ function findSrCardById(givenId) {
     return null;
 }
 
+// function to run through array with corresponing to it category (card rarity) 
 function getCardIds(category) {
     validateCardStructure();
-
-    if (typeof category !== 'string') {
-        throw new Error('Category must be a string');
-    }
 
     const categoryCards = cards[category].cards;
     let cardIds = [];
@@ -251,10 +261,6 @@ function getCardIds(category) {
     for (let key in categoryCards) {
         if (categoryCards.hasOwnProperty(key)) {
             const cardId = categoryCards[key].id;
-
-            if (cardIds.includes(cardId)) {
-                throw new Error('Duplicate card ID found: ' + cardId);
-            }
 
             if (!cardId.startsWith(category)) {
                 throw new Error(`Card ID ${cardId} does not match its category: ${category}`);
@@ -267,70 +273,99 @@ function getCardIds(category) {
     return cardIds;
 };
 
+// defines pityCount that will be updated at further functions
 let pityCount = 0;
+// defines rarityes that could be rolled
+const Rarity = {
+    SR: 'sr',
+    SSR: 'ssr',
+};
 
+// function that selects a random cards.id corresponding to cardIds (defined either as srCardids or ssrCardIds) and rarity (which is written in Rarity array)
+function handleCardSelection(cardIds, rarity) {
+    const randomId = Math.floor(Math.random() * cardIds.length);
+    const selectedCard = (rarity === Rarity.SR) ? findSrCardById(cardIds[randomId]) : findSsrCardById(cardIds[randomId]);
+
+    console.log(`YOU GOT: ${rarity.toUpperCase()}`);
+    console.log(selectedCard);
+
+    handleCardChanges(selectedCard, rarity);
+};
+
+// function to be used when sr rarity card is rolled, triggers functions to handle changes and getCardIds
 function srHandling() {
     validateCardStructure();
 
-    const srCardIds = getCardIds('sr');
-    const randomId = Math.floor(Math.random() * srCardIds.length);
-    const selectedCard = findSrCardById(srCardIds[randomId]);
+    const srCardIds = getCardIds(Rarity.SR);
 
-    console.log(selectedCard);
-    console.log('sr');
-
-    pityCount++;
-
-    console.log(`current pity: ${pityCount}`); 
+    handleCardSelection(srCardIds, Rarity.SR);
 
     if (cardRarity.classList.contains('ssr') || cardRarity.classList.contains('ur')) {
         cardRarity.classList.remove('ssr');
         cardRarity.classList.remove('ur')
     }
-    
-    handleCardChanges(selectedCard, 'sr');
+
+    pityCount++;
 };
 
+// same as sr rarity card handling but with ssr
 function ssrHandling() {
-    validateCardStructure()
+    validateCardStructure();
 
-    console.log('YOU GOT: SSR');
+    const ssrCardIds = getCardIds(Rarity.SSR);
 
-    const ssrCardIds = getCardIds('ssr');
-    const randomId = Math.floor(Math.random() * ssrCardIds.length);
-    const foundCard = findSsrCardById(ssrCardIds[randomId]);
-
-    console.log(foundCard);
-
-    pityCount = 0;
-
-    console.log(`current pity: ${pityCount}`);
+    handleCardSelection(ssrCardIds, Rarity.SSR);
 
     if (cardRarity.classList.contains('sr') || cardRarity.classList.contains('ur')) {
         cardRarity.classList.remove('sr');
         cardRarity.classList.remove('ur')
     }
 
-    handleCardChanges(foundCard, 'ssr');
+    resetStepUp();
 };
 
+// step up system
+let stepUpCount = 0;
+const stepUpMilestones = {
+    10: { increaseSSR: 5 }, 
+};
+
+// roll probabilities
+const probabilities = {
+    sr: 95,
+    ssr: 5,
+    pityThreshold: 60,
+};
+
+// function to roll a card
 function buyCard(value) {
     validateCardStructure();
 
-    let randomNumber = Math.floor(Math.random(1) * 50 + 1);
-    console.log(randomNumber);
+    let rollChance = Math.floor(Math.random() * 100);
 
-    if (randomNumber > 48) {
-        randomNumber -= 1;
-    }
+    stepUpCount++;
 
-    if (randomNumber < 49) {
+    adjustProbabilitiesForStepUp();
+
+    if (probabilities.ssr >= rollChance || probabilities.pityThreshold === pityCount) {
+        ssrHandling();
+    } else if (probabilities.sr + probabilities.ssr >= rollChance) {
         srHandling();
-    } else if (randomNumber >= 49) {
-        ssrHandling();
-    }
+    } else {
+        throw new Error('Roll failed')
+    } 
+}
 
-    if (pityCount === 45) {
-        ssrHandling();
+// function to handle step up system
+function adjustProbabilitiesForStepUp() {
+    if (stepUpMilestones[stepUpCount]?.increaseSSR) {
+        probabilities.ssr += stepUpMilestones[stepUpCount].increaseSSR;
     }
+};
+
+// reset function, usually is being triggers after rolling SSR card
+function resetStepUp() {
+    stepUpCount = 0;
+    pityCount = 0;
+    probabilities.ssr = 5;
 };
