@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Chronicles</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KCXGVSJ5');</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VHBYFXWQD"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6VHBYFXWQD');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="user">
+            <h2 class="user-name" id="userName"></h2>
+            <ul class="user-list">
+                <li class="user-item" id="userCurrency"></li>
+                <li class="user-item">
+                    <div class="user-materials-trigger" id="userMatTrigger">
+                        <p>Hover Me</p>
+                        <div class="user-materials-container inactive">                         
+                            <ul class="materials-list">
+                                <li class="materials-item"></li>
+                                <li class="materials-item"></li>
+                                <li class="materials-item"></li>
+                                <li class="materials-item"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="main">
+        <button id="trigger" onclick="buyCard(150)">Click Me</button>
+
+        <div class="card-container inactive">
+            <div class="card">
+                <div class="card-front">
+                    <div class="character-image">
+                        <img id="characterImg" src="">
+                    </div>
+                    <div class="title"></div>
+                    <div class="stats">
+                        <li class="card-br" id="cardBr"></li>
+                        <li class="card-value" id="cardVl"></li>
+                    </div>
+                    <div class="rarity"></div>
+                </div>
+                <div class="card-back">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button onclick="addCurrency(150)">magic button</button>
+    
+    <script src="./script.js"></script>
+    <script src="./app.js"></script>   
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCXGVSJ5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+</body>
+</html>
