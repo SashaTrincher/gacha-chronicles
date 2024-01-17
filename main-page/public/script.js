@@ -1,5 +1,6 @@
 // © 2024 Trincher Oleksandr
 
+// fetching user data
 fetch('http://localhost:3000/user')
     .then(response => response.json())
     .then(data => {
@@ -10,6 +11,7 @@ fetch('http://localhost:3000/user')
         console.error('Error fetching user data:', error);
     });
 
+// function to add currency (Rubain)
 function addCurrency(value) {
     fetch('http://localhost:3000/user/addRubain', {
         method: 'POST',
@@ -20,12 +22,12 @@ function addCurrency(value) {
     })
     .then(response => response.json())
     .then(data => {
-        // Update the client-side user data and DOM elements based on the server response
-        console.log(data);  // Log the updated data
-        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;  // Update the DOM
+        console.log(data);  
+        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;  
     });
 };
 
+// function to remove currency (Rubain)
 function removeCurrency(value) {
     fetch('http://localhost:3000/user/removeRubain', {
         method: 'POST',
@@ -36,9 +38,8 @@ function removeCurrency(value) {
     })
     .then(response => response.json())
     .then(data => {
-        // Update the client-side user data and DOM elements based on the server response
-        console.log(data);  // Log the updated data
-        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;  // Update the DOM
+        console.log(data); 
+        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`; 
     });
 };
 
