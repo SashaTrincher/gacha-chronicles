@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());  
 
 let userData = {
-    username: 'ZamnZZ',
+    username: '',
     rubain: 0,
     materials: {
         green: 0,
