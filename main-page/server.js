@@ -47,7 +47,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 10,
-                imageUrl: '',
+                imageUrl: 'card-img/chopper-pre.webp',
             },
             brook: {
                 cardName: 'Brook',
@@ -55,7 +55,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 50,
-                imageUrl: '',
+                imageUrl: 'card-img/brook.png',
             },
             nami: {
                 cardName: 'Nami',
@@ -63,7 +63,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 100,
-                imageUrl: '',
+                imageUrl: 'card-img/nami-card.png',
             },
             hisoka: {
                 cardName: 'Hisoka',
@@ -71,7 +71,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 100,
-                imageUrl: '',
+                imageUrl: 'card-img/hisoka.png',
             },
             asuna: {
                 cardName: 'Asuna',
@@ -79,7 +79,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 200,
-                imageUrl: '',
+                imageUrl: 'card-img/asuna.png',
             },
             kirito: {
                 cardName: 'Kirito',
@@ -130,7 +130,7 @@ const cards = {
                 imageUrl: '',
             },
             sunjinwoopre: {
-                cardName: 'Sung Jinwoo Pre-Game',
+                cardName: 'Sung Jinwoo',
                 id: 'sr12',
                 rarity: 'SR',
                 percentage: '25%',
@@ -206,7 +206,7 @@ const cards = {
                 imageUrl: '',
             },
             nobara: {
-                cardName: 'Nobara Kugisaki',
+                cardName: 'Nobara',
                 id: 'ssr4',
                 rarity: 'SSR',
                 percentage: '15%',
@@ -278,7 +278,7 @@ const cards = {
                 imageUrl: '',
             },
             gojo: {
-                cardName: 'Satoru Gojo',
+                cardName: 'Gojo',
                 id: 'ssr13',
                 rarity: 'SSR',
                 percentage: '15%',
