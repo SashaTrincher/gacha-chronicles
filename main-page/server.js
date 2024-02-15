@@ -87,7 +87,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 300,
-                imageUrl: '',
+                imageUrl: 'card-img/kirito.webp',
             },
             denji: {
                 cardName: 'Denji',
@@ -95,23 +95,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 300,
-                imageUrl: '',
-            },
-            sanjiprets: {
-                cardName: 'Sanji Pre-TS',
-                id: 'sr8',
-                rarity: 'SR',
-                percentage: '25%',
-                battleRating: 100,
-                imageUrl: '',
-            },
-            zoroprets: {
-                cardName: 'Zoro Pre-TS',
-                id: 'sr9',
-                rarity: 'SR',
-                percentage: '25%',
-                battleRating: 150,
-                imageUrl: '',
+                imageUrl: 'card-img/denji.webp',
             },
             ichigohum: {
                 cardName: 'Ichigo (Human)',
@@ -119,7 +103,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 10,
-                imageUrl: '',
+                imageUrl: 'card-img/ichigohuman.jpg',
             },
             josephjos: {
                 cardName: 'Joseph Joestar',
@@ -127,7 +111,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 100,
-                imageUrl: '',
+                imageUrl: 'card-img/josephjoe.webp',
             },
             sunjinwoopre: {
                 cardName: 'Sung Jinwoo',
@@ -135,7 +119,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 10,
-                imageUrl: '',
+                imageUrl: 'card-img/sungjinpre.webp',
             },
             dekuprequirk: {
                 cardName: 'Deku',
@@ -143,7 +127,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 5,
-                imageUrl: '',
+                imageUrl: 'card-img/dekupre.png',
             },
             escanorpre: {
                 cardName: 'Escanor',
@@ -151,7 +135,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 5,
-                imageUrl: '',
+                imageUrl: 'card-img/escanorhum.png',
             },
             meliodassealed: {
                 cardName: 'Meliodas (Base)',
@@ -159,7 +143,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 150,
-                imageUrl: '',
+                imageUrl: 'card-img/meliodassealed.png',
             },
             tanjiropre: {
                 cardName: 'Tanjiro (Base)',
@@ -167,7 +151,7 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 250,
-                imageUrl: '',
+                imageUrl: 'card-img/tanjiropre.webp',
             },
         },     
     },
@@ -182,6 +166,7 @@ const cards = {
                 battleRating: 2000,
                 imageUrl: 'card-img/luffy-post-ts-card.png',
                 bgImageUrl: 'card-bg-img/luffy-post-ts-bg.webp',
+                canEvolve: true,
                 upgradeMaterial: {
                     green: 25,
                     red: 50,
@@ -195,15 +180,8 @@ const cards = {
                 percentage: '10%',
                 battleRating: 1700,
                 imageUrl: 'card-img/zoro-wano-card.webp',
-                bgImageUrl: 'card-bg-img/zoro-wano-bg.webp'
-            },
-            sanji: {
-                cardName: 'Sanji Wano',
-                id: 'ssr3',
-                rarity: 'SSR',
-                percentage: '15%',
-                battleRating: 1300,
-                imageUrl: '',
+                bgImageUrl: 'card-bg-img/zoro-wano-bg.webp',
+                canEvolve: false,
             },
             nobara: {
                 cardName: 'Nobara',
@@ -211,7 +189,8 @@ const cards = {
                 rarity: 'SSR',
                 percentage: '15%',
                 battleRating: 1200,
-                imageUrl: '',
+                bgImageUrl: 'card-bg-img/kugisaki.png',
+                canEvolve: false,
             },
             itadori: {
                 cardName: 'Itadori Yuji',
@@ -220,6 +199,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 2000,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/itadori-bg-img.jpg',
+                canEvolve: false,
             },
             todo: {
                 cardName: 'Aoi Todo',
@@ -228,6 +209,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 2200,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/aoi-todo-bg.png',
+                canEvolve: false,
             },
             vegetoSsj: {
                 cardName: 'Vegeto SSJ',
@@ -236,6 +219,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 3000,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/vegetossj-bg-img.jpg',
+                canEvolve: false,
             },
             gokuSsj: {
                 cardName: 'Goku SSJ',
@@ -244,6 +229,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 3200,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/gokussj-bg-img.png',
+                canEvolve: false,
             },
             gabimaru: {
                 cardName: 'Gabimaru',
@@ -252,6 +239,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 900,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/gabimaru-bg-img.jpg',
+                canEvolve: false,
             },
             escanorsun: {
                 cardName: 'Escanor (Sun)',
@@ -260,6 +249,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 1500,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/escanorsun-bg-img.jpg',
+                canEvolve: true,
             },
             meliodaspostrev: {
                 cardName: 'Meliodas',
@@ -268,6 +259,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 2000,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/meliodaspost-bg-img.jpg',
+                canEvolve: true,
             },
             tanjiropost: {
                 cardName: 'Tanjiro',
@@ -276,6 +269,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 1500,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/tanjiropost-bg-img.jpg',
+                canEvolve: true,
             },
             gojo: {
                 cardName: 'Gojo',
@@ -284,6 +279,8 @@ const cards = {
                 percentage: '15%',
                 battleRating: 4000,
                 imageUrl: '',
+                bgImageUrl: 'card-bg-img/gojo-bg-img.webp',
+                canEvolve: true,
             },
         },
     },

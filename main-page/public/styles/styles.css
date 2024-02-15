@@ -28,6 +28,12 @@ html, body {
     align-items: center;
     justify-content: center;
 }
+.active {
+    display: block;
+}
+.inactive {
+    display: none;
+}
 /* card design */
 #trigger {
     margin-bottom: 50px;
@@ -95,6 +101,12 @@ html, body {
     max-height: 60%;
     margin-bottom: 10px;
 }
+.character-image.active {
+    display: flex;
+}
+.character-image.inactive {
+    display: none;
+}
 
 .character-image img {
     width: 300px;
@@ -117,7 +129,7 @@ html, body {
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
     padding: 10px;
-    width: 100%;
+    width: 280px;
     box-shadow: 0 0 10px #fff;
     border-radius: 5px;
     margin-bottom: 10px;

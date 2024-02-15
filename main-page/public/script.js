@@ -102,6 +102,7 @@ async function fetchData(data) {
     // dom elements of card element
     const cardBr = document.getElementById('cardBr');
     const characterImg = document.getElementById('characterImg');
+    const characterImgContainer = document.querySelector('.character-image')
     const cardTitle = document.querySelector('.title');
     const cardRarity = document.querySelector('.rarity');
     const cardValue = document.getElementById('cardVl');
@@ -128,6 +129,10 @@ async function fetchData(data) {
         } else if (card.id.includes('sr')) {
             cardValue.innerHTML = `Card's Value: ${cards.sr.value}`;
         }
+
+        if (card.imageUrl === undefined || card.imageUrl === '') [
+            characterImg.src = 'placeholder/transparent.png'
+        ]
     };
 
     // function to run through the array with ssr rairty cards and find card with corresponding givenId
@@ -261,10 +266,10 @@ async function fetchData(data) {
                     .then(data => {
                         console.log(data);
 
-                        if (probabilities.ssr >= data || probabilities.pityThreshold === pityCount) {
-                            ssrHandling();
-                        } else if (probabilities.sr + probabilities.ssr >= data) {
+                        if (probabilities.ssr <= data || probabilities.pityThreshold === pityCount) {
                             srHandling();
+                        } else if (probabilities.sr + probabilities.ssr >= data) {
+                            ssrHandling();
                         } else {
                             throw new Error('Roll failed');
                         };
