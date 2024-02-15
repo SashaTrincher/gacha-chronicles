@@ -135,6 +135,17 @@ async function fetchData(data) {
         ]
     };
 
+    function ascensionDetect(card) {
+        const ascendTrigger = document.getElementById('ascendButton')
+        if (card.canEvolve === true) {
+            ascendTrigger.classList.replace('inactive', 'active');
+        } else if (ascendTrigger.classList.contains('inactive') && card.canEvolve === false) {
+            ascendTrigger.classList.replace('active', 'inactive');
+        } else {
+            return;
+        };
+    }
+
     // function to run through the array with ssr rairty cards and find card with corresponding givenId
     function findSsrCardById(givenId) {
 
@@ -234,6 +245,14 @@ async function fetchData(data) {
         if (cardRarity.classList.contains('sr') || cardRarity.classList.contains('ur')) {
             cardRarity.classList.remove('sr');
             cardRarity.classList.remove('ur')
+        }
+
+        if (ssrCardIds.canEvolve === true) {
+            ascensionDetect(ssrCardIds);
+
+            
+        } else {
+            return
         }
 
         resetStepUp();

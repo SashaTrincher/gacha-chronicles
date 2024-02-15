@@ -20,11 +20,18 @@
     </script>
 </head>
 <body>
-    <header class="header">
+    <header class="game-header">
+        <div class="header-content">
+            <h1>Gacha Chronicles</h1>
+            <div class="user-info">
+                <span class="user-name" id="userName">Username</span>
+                <span class="user-currency" id="userCurrency"></span>
+            </div>
+        </div>
+    </header>
+    <!-- <header class="header">
         <div class="user">
-            <h2 class="user-name" id="userName"></h2>
             <ul class="user-list">
-                <li class="user-item" id="userCurrency"></li>
                 <li class="user-item">
                     <div class="user-materials-trigger" id="userMatTrigger">
                         <p>Hover Me</p>
@@ -40,11 +47,12 @@
                 </li>
             </ul>
         </div>
-    </header>
+    </header> -->
 
-    <main class="main">
-        <button id="trigger">Click Me</button>
-
+    <main class="game-main">
+        <div class="roll-button-container">
+            <button id="trigger" class="roll-card-button">Roll Card</button>
+        </div>
         <div class="card-container inactive">
             <div class="card">
                 <div class="card-front">
@@ -59,7 +67,7 @@
                     <div class="rarity"></div>
                 </div>
                 <div class="card-back">
-                    <button id="ascendButton">Ascend Card</button>
+                    <button class="card-back-ascend inactive" id="ascendButton">Ascend Card</button>
                 </div>
             </div>
         </div>
