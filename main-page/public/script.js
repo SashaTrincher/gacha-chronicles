@@ -4,7 +4,6 @@
 fetch('http://localhost:3000/user')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;
         const matItems = document.querySelectorAll('.materials-item');
 
@@ -37,8 +36,7 @@ function addCurrency(value) {
         body: JSON.stringify({ value: value }),
     })
     .then(response => response.json())
-    .then(data => {
-        console.log(data);  
+    .then(data => { 
         document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;  
     });
 };
@@ -53,8 +51,7 @@ function removeCurrency(value) {
         body: JSON.stringify({ value: value }),
     })
     .then(response => response.json())
-    .then(data => {
-        console.log(data); 
+    .then(data => { 
         document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`; 
     });
 };
@@ -63,38 +60,31 @@ function removeCurrency(value) {
 // dom elements 
 const trigger = document.getElementById('trigger');
 
-async function fetchData(data) {
-    if (data === 'cards') {
-        try {
-            const cardsResponse = await fetch('http://localhost:3000/data/cards');
-            const cardsData = await cardsResponse.json();
-            return cardsData;
+async function fetchData(dataType) {
+    const endpoints = {
+        'cards': 'cards',
+        'probabilities': 'probabilities',
+        'stetUpMilestones': 'milestones', 
+        'stepUpCount': 'stepUpCount'
+    };
 
-        } catch (error) {
-            console.error('Error fetching cards:', error);
-        }
+    const endpoint = endpoints[dataType];
+    if (!endpoint) {
+        console.error(`Invalid data type: ${dataType}`);
+        return;
     }
-    if (data === 'probabilities') {
-        try {
-            const probsResponse = await fetch('http://localhost:3000/data/probabilities');
-            const probsData = await probsResponse.json();
-            return probsData;
 
-        } catch (error) {
-            console.error('Error fetching cards:', error);
+    try {
+        const response = await fetch(`http://localhost:3000/data/${endpoint}`);
+        if (!response.ok) {
+            throw new Error(`Error fetching ${dataType}: Network response was not ok`);
         }
+        return await response.json();
+    } catch (error) {
+        console.error(error.message);
     }
-    if (data === 'stetUpMilestones') {
-        try {
-            const milestonesResponse = await fetch('http://localhost:3000/data/milestones');
-            const milestonesData = await milestonesResponse.json();
-            return milestonesData;
+}
 
-        } catch (error) {
-            console.error('Error fetching cards:', error);
-        }
-    }
-};
 
 (async () => {
     const cards = await fetchData('cards');
@@ -102,12 +92,13 @@ async function fetchData(data) {
     // dom elements of card element
     const cardBr = document.getElementById('cardBr');
     const characterImg = document.getElementById('characterImg');
-    const characterImgContainer = document.querySelector('.character-image')
+    const characterImgContainer = document.querySelector('.character-image');
     const cardTitle = document.querySelector('.title');
     const cardRarity = document.querySelector('.rarity');
     const cardValue = document.getElementById('cardVl');
     const cardContainer = document.querySelector('.card-container');
     const cardFront = document.querySelector('.card-front');
+    const ascendTrigger = document.getElementById('ascendButton');
 
     // function to handle changes after the card was rolled
     function handleCardChanges(card, rarity) {
@@ -130,13 +121,10 @@ async function fetchData(data) {
             cardValue.innerHTML = `Card's Value: ${cards.sr.value}`;
         }
 
-        if (card.imageUrl === undefined || card.imageUrl === '') [
+        if (card.imageUrl === undefined || card.imageUrl === '') {
             characterImg.src = 'placeholder/transparent.png'
-        ]
-    };
+        }
 
-    function ascensionDetect(card) {
-        const ascendTrigger = document.getElementById('ascendButton')
         if (card.canEvolve === true) {
             ascendTrigger.classList.replace('inactive', 'active');
         } else if (ascendTrigger.classList.contains('inactive') && card.canEvolve === false) {
@@ -144,9 +132,9 @@ async function fetchData(data) {
         } else {
             return;
         };
-    }
+    };
 
-    // function to run through the array with ssr rairty cards and find card with corresponding givenId
+    // function to run through the array with ssr rairty cards and find card with corresponding givenId (id of a card)
     function findSsrCardById(givenId) {
 
         const ssrCards = cards.ssr.cards;
@@ -231,7 +219,7 @@ async function fetchData(data) {
             cardRarity.classList.remove('ur')
         }
 
-        pityCount++;
+        initiateStepUpUpdate('add', 1);
     };
 
     // same as sr rarity card handling but with ssr
@@ -247,64 +235,91 @@ async function fetchData(data) {
             cardRarity.classList.remove('ur')
         }
 
-        if (ssrCardIds.canEvolve === true) {
-            ascensionDetect(ssrCardIds);
-
-            
-        } else {
-            return
-        }
-
         resetStepUp();
     };
 
     // probabilities for cards
     const probabilities = await (fetchData('probabilities'));
 
+    async function updateStepUpCount(action, value) {
+        const endpointMap = {
+            'add': 'addStepUpCount',
+            'remove': 'removeStepUpCount'
+        };
+    
+        const endpoint = endpointMap[action];
+        if (!endpoint) {
+            console.error(`Invalid action: ${action}`);
+            return;
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:3000/data/${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value: value }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log(data);
+            await getStepUpCount(); 
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+    
+    async function getStepUpCount() {
+        return await (fetchData('stepUpCount'));
+    };
+
+    async function initiateStepUpUpdate(action, value) {
+        await updateStepUpCount(action, value); 
+        stepUpCount = await getStepUpCount(); 
+        console.log(stepUpCount); 
+    }
+
     // step up system
-    let stepUpCount = 0;
+    let stepUpCount = await getStepUpCount();
+    console.log(stepUpCount);
     const stepUpMilestones = await (fetchData('stetUpMilestones'));
 
     // function to roll a card
-    function buyCard(value) {
-        fetch('http://localhost:3000/user')
-        .then(response => response.json())
-        .then(data => {
+    async function buyCard(value) {
+        try {
+            const userResponse = await fetch('http://localhost:3000/user');
+            const userData = await userResponse.json();
+    
             console.log(`Prob SSR: ${probabilities.ssr}. Prob SR: ${probabilities.sr}`);
-            console.log(`Step Up: ${stepUpCount}`);
-
-            
-
-            if (data.rubain >= value) {
-                stepUpCount++;
-
+            if (userData.rubain >= value) {
                 adjustProbabilitiesForStepUp();
-
-                fetch('http://localhost:3000/roll/chanceRoll')
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-
-                        if (probabilities.ssr <= data || probabilities.pityThreshold === pityCount) {
-                            srHandling();
-                        } else if (probabilities.sr + probabilities.ssr >= data) {
-                            ssrHandling();
-                        } else {
-                            throw new Error('Roll failed');
-                        };
-                    })
-                    .catch(error => {
-                        console.error('Error fetching user data:', error);
-                    });
-
-                removeCurrency(value);
+    
+                const rollResponse = await fetch('http://localhost:3000/roll/chanceRoll');
+                const rollData = await rollResponse.json();
+    
+                if (probabilities.ssr <= rollData || probabilities.pityThreshold === pityCount) {
+                    srHandling();
+                    console.log(`Step Up: ${stepUpCount}`);
+                    console.log(`Probabilities ${probabilities}`);
+                } else if (probabilities.sr + probabilities.ssr >= rollData) {
+                    ssrHandling();
+                    await resetStepUp(); // Assuming resetStepUp is now async
+                } else {
+                    throw new Error('Roll failed');
+                };
+    
+                removeCurrency(value); // Ensure this is handled correctly if asynchronous
             } else {
-                alert(`You don't have enough Rubain. Your current Rubain amount is: ${data.rubain}`)
+                alert(`You don't have enough Rubain. Your current Rubain amount is: ${userData.rubain}`);
             }
-        })
-        .catch(error => {
-            console.error('Error fetching user data:', error);
-        });
+        } catch (error) {
+            console.error('Error in buyCard operation:', error);
+        }
     };
 
     trigger.addEventListener('click', () => {
@@ -320,8 +335,8 @@ async function fetchData(data) {
     };
 
     // reset function, usually is being triggers after rolling SSR card
-    function resetStepUp() {
-        stepUpCount = 0;
+    async function resetStepUp() {
+        initiateStepUpUpdate('remove', stepUpCount); 
         pityCount = 0;
         probabilities.ssr = 1;
         probabilities.sr = 99;

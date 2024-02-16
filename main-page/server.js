@@ -47,7 +47,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 10,
-                imageUrl: 'card-img/chopper-pre.webp',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/chopperpre-bg-img.jpg',
             },
             brook: {
                 cardName: 'Brook',
@@ -55,7 +56,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 50,
-                imageUrl: 'card-img/brook.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/brook-bg-img.jpg',
             },
             nami: {
                 cardName: 'Nami',
@@ -63,7 +65,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 100,
-                imageUrl: 'card-img/nami-card.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/nami-bg-img.jpg',
             },
             hisoka: {
                 cardName: 'Hisoka',
@@ -71,7 +74,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 100,
-                imageUrl: 'card-img/hisoka.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/hisoka-bg-img.webp',
             },
             asuna: {
                 cardName: 'Asuna',
@@ -79,7 +83,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 200,
-                imageUrl: 'card-img/asuna.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/asuna-bg-img.jpg',
             },
             kirito: {
                 cardName: 'Kirito',
@@ -87,7 +92,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 300,
-                imageUrl: 'card-img/kirito.webp',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/kirito-bg-img.webp',
             },
             denji: {
                 cardName: 'Denji',
@@ -95,7 +101,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 300,
-                imageUrl: 'card-img/denji.webp',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/denji-bg-img.jpg',
             },
             ichigohum: {
                 cardName: 'Ichigo (Human)',
@@ -103,7 +110,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 10,
-                imageUrl: 'card-img/ichigohuman.jpg',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/ichigo-hum-bg-img.webp',
             },
             josephjos: {
                 cardName: 'Joseph Joestar',
@@ -111,15 +119,17 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 100,
-                imageUrl: 'card-img/josephjoe.webp',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/joseph-joe-bg-img.jpg',
             },
             sunjinwoopre: {
-                cardName: 'Sung Jinwoo',
+                cardName: 'Sung Jinwoo (Pre)',
                 id: 'sr12',
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 10,
-                imageUrl: 'card-img/sungjinpre.webp',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/sungjinpre-bg-img.png',
             },
             dekuprequirk: {
                 cardName: 'Deku',
@@ -127,7 +137,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 5,
-                imageUrl: 'card-img/dekupre.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/dekupre-bg-img.jpg',
             },
             escanorpre: {
                 cardName: 'Escanor',
@@ -135,7 +146,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 5,
-                imageUrl: 'card-img/escanorhum.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/escanorpre-bg-img.webp',
             },
             meliodassealed: {
                 cardName: 'Meliodas (Base)',
@@ -143,7 +155,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 150,
-                imageUrl: 'card-img/meliodassealed.png',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/meliodassealed-bg-img.jpg',
             },
             tanjiropre: {
                 cardName: 'Tanjiro (Base)',
@@ -151,7 +164,8 @@ const cards = {
                 rarity: 'SR',
                 percentage: '25%',
                 battleRating: 250,
-                imageUrl: 'card-img/tanjiropre.webp',
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/tanjiropre-bg-img.jpeg',
             },
         },     
     },
@@ -282,6 +296,16 @@ const cards = {
                 bgImageUrl: 'card-bg-img/gojo-bg-img.webp',
                 canEvolve: true,
             },
+            sungjin: {
+                cardName: 'Sung Jinwoo',
+                id: 'ssr14',
+                rarity: 'SSR',
+                percentage: '15%',
+                battleRating: 2500,
+                imageUrl: '',
+                bgImageUrl: 'card-bg-img/sungjin-bg-img.jpg',
+                canEvolve: true,
+            },
         },
     },
     ur: { // ur raities cards
@@ -397,6 +421,24 @@ const stepUpMilestones = {
     45: { increaseSSR: 25},
     50: { increaseSSR: 20},
 };
+
+let stepUpCount = 0;
+
+app.get('/data/stepUpCount', (req, res) => {
+    res.json(stepUpCount);
+});
+
+app.post('/data/addStepUpCount', (req, res) => {
+    const { value } = req.body;
+    stepUpCount += value;
+    res.json({ stepUpCount: stepUpCount });
+});
+
+app.post('/data/removeStepUpCount', (req, res) => {
+    const { value } = req.body;
+    stepUpCount = 0;
+    res.json({ stepUpCount: stepUpCount });
+});
 
 app.get('/data/milestones', (req, res) => {
     res.json(stepUpMilestones);

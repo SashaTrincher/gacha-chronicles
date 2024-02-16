@@ -66,44 +66,6 @@ html, body {
     background-color: #9b30ff; 
 }
 
-.card-placeholder {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.card {
-    width: 250px;
-    background-color: #f0f0f5;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.card-front {
-    padding: 10px;
-}
-
-.character-image {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.card-title {
-    color: #4a5278; 
-    font-size: 1.5em;
-    margin: 10px 0;
-}
-
-.card-details {
-    color: #333;
-}
-
-.card-stat, .card-rarity {
-    margin: 5px 0;
-}
-
 .header {
     display: none;
     align-items: center;
