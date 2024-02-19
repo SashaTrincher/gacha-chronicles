@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gacha Chronicles</title>
     <link rel="stylesheet" href="./styles/styles.css">
+    <script src="https://kit.fontawesome.com/f3b67a7541.js" crossorigin="anonymous"></script>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -20,37 +21,27 @@
     </script>
 </head>
 <body>
-    <header class="game-header">
-        <div class="header-content">
-            <h1>Gacha Chronicles</h1>
-            <div class="user-info">
-                <span class="user-name" id="userName">Username</span>
-                <span class="user-currency" id="userCurrency"></span>
+    <header class="header">
+        <div class="user">
+            <img class="user-img" src="./img/stars.png">
+            <a href="#" class="user-name" id="userName">user</a>
+        </div>
+        <div class="banners">
+            <div class="banner" id="banner">
+                <img class="bannerImg" src="./img/banner-img-gojo.png" alt="">
+            </div>
+        </div>
+        <div class="currency">
+            <img class="currency-img" src="./img/rubain-img.png" alt="">
+            <p class="user-currency" id="userCurrency"></p>
+            <div class="currencyRedirect">
+                <i class="fa-solid fa-plus"></i>
             </div>
         </div>
     </header>
-    <!-- <header class="header">
-        <div class="user">
-            <ul class="user-list">
-                <li class="user-item">
-                    <div class="user-materials-trigger" id="userMatTrigger">
-                        <p>Hover Me</p>
-                        <div class="user-materials-container inactive">                         
-                            <ul class="materials-list">
-                                <li class="materials-item"></li>
-                                <li class="materials-item"></li>
-                                <li class="materials-item"></li>
-                                <li class="materials-item"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </header> -->
 
-    <main class="game-main">
-        <div class="roll-button-container">
+    <main class="main">
+        <!-- <div class="roll-button-container">
             <button id="trigger" class="roll-card-button">Roll Card</button>
         </div>
         <div class="card-container inactive">
@@ -70,13 +61,41 @@
                     <button class="card-back-ascend inactive" id="ascendButton">Ascend Card</button>
                 </div>
             </div>
+        </div> -->
+        <div class="main-container">
+            <div class="container-promote">
+                <p>Character Event Wish</p>
+            </div>
+            <div class="container-left">
+                <h2 class="container-title">Radiant Dawn <br> of <span>Destiny</span></h2>
+                <h3 class="text-prob">Probability increased!</h3>
+                <div class="prob-container">
+                    <p>Every 10 wishes, your chances of receiving an SSR card grow.</p>
+                </div>
+                <p class="prob-info">UR rarity collectible cards are upgrade-exclusive, <br> meaning they can only be obtained by upgrading <br> an SSR card to the desired rarity.</p>
+            </div>
+            <div class="container-center">
+                <img src="./img/gojo-char.webp" alt="">
+                <div class="char-description">
+                    <h2>Gojo</h2>
+                    <p class="char-rarity">SSR</p>
+                    <div>
+                        <p class="char-sub-text">The honored one.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-right">
+
+            </div>
+        </div>
+        <div class="footer-container">
+
         </div>
     </main>
-
-    <button onclick="addCurrency(1000000)">magic button</button>
     
     <script src="./script.js"></script>
     <script src="./app.js"></script>   
+    <script type="module" src="./grabber.js"></script>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCXGVSJ5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>
 </html>

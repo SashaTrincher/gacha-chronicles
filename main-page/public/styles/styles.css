@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Namdhinggo:wght@400;500;600;700;800&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* global styles */
 * {
     user-select: none;
     text-decoration: none;
@@ -11,78 +12,289 @@
     box-sizing: border-box;
     z-index: 0;
 }
-
 html, body {
     width: 100%;
+    height: 100%; 
+}
+body {
+    background-image: url('../img/page-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.active {
+    display: flex;
+}
+.inactive {
+    display: none;
+}
+/* header */
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 125px;
+    margin: 20px 0 20px 0;
+}
+.user {
+    width: 110px;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.user-name {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    font-style: normal;
+    font-size: 27px;
+    color: #fff;
+    text-shadow: 
+      1.4px 1.4px 0 rgb(119, 113, 113), 
+      -1.4px -1.4px 0 rgb(119, 113, 113),
+      1.4px -1.4px 0 rgb(119, 113, 113), 
+      -1.4px 1.4px 0 rgb(119, 113, 113);
+}
+.banners {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    height: 125px;
+    position: relative;
+}
+.bannerImg {
+    width: 220px;
     height: 100%;
 }
-.game-header {
-    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-    padding: 20px;
-    color: #fff;
-    text-align: center;
-    border-bottom: 3px solid #8a2be2;
-}
-
-.header-content h1 {
-    font-family: 'Merriweather', serif; /* Example font, ensure you import or choose a suitable one */
-    font-size: 2.5em;
-    color: #f1e9e5;
-    text-shadow: 0px 0px 10px #ff8c00, 0 0 20px #ff8c00, 0 0 30px #ff8c00, 0 0 40px #ff8c00, 0 0 50px #ff8c00, 0 0 60px #ff8c00, 0 0 70px #ff8c00;
-}
-
-.user-info {
-    margin-top: 10px;
-}
-
-.user-name, .user-currency {
-    font-size: 1.2em;
-    display: block;
-}
-
-.user-currency {
-    color: #adff2f;
-    font-weight: bold;
-}
-.game-main {
-    padding: 20px;
-    text-align: center;
-    background: #191d3a;
-}
-
-.roll-card-button {
-    background-color: #8a2be2; 
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-}
-
-.roll-card-button:hover {
-    background-color: #9b30ff; 
-}
-
-.header {
-    display: none;
+.currency {
+    display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: 50px;
+    justify-content: space-between;
+    width: 125px;
+    height: 25%;
+    background-color: rgba(80, 80, 80, 0.404);
+    border: 1px solid #ffffff27;
+    border-radius: 20px;
 }
+.currency-img {
+    width: 27px;
+    height: 95%;
+    margin-left: 3px;
+}
+.user-currency {
+    text-align: center;
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    color: #ffeed5;
+    font-size: 20px;
+}
+.currencyRedirect {
+    margin-right: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 80%;
+    background-color: #ffeed5;
+    border-radius: 50%;
+}
+.fa-plus {
+    
+}
+
+/* main */
 .main {
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.active {
-    display: block;
+/* main container */
+.main-container {
+    border-radius: 10px;
+    width: 70%;
+    height: 800px;
+    background-image: url('../img/banner-container-img.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
-.inactive {
-    display: none;
+/* h3 {
+    text-shadow: 
+      0.8px 0.8px 0 white, 
+      -0.8px -0.8px 0 white, 
+      0.8px -0.8px 0 white, 
+      -0.8px 0.8px 0 white;
+} */
+.container-promote {
+    background-color: #3c7dc4;
+    border-radius: 20px 0 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 25px;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+}
+.container-promote p {
+    font-family: "Namdhinggo", serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 20px;
+    color: #fff;
+}
+.container-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 30px;
+}
+.container-title {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: #29304b;
+    margin-bottom: 30px;
+}
+.container-title span {
+    color: #6e82c9;
+    text-shadow: 
+      0.8px 0.8px 0 white, 
+      -0.8px -0.8px 0 white, 
+      0.8px -0.8px 0 white, 
+      -0.8px 0.8px 0 white;
+}
+.text-prob {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.7px;
+    color: #475575;
+    text-shadow: 
+      0.6px 0.6px 0 white, 
+      -0.6px -0.6px 0 white, 
+      0.6px -0.6px 0 white, 
+      -0.6px 0.6px 0 white;
+    margin-bottom: 10px;
+}
+.prob-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 350px;
+    height: 70px;
+    background-color: rgba(113, 203, 255, 0.61);
+    margin-bottom: 10px;
+}
+.prob-container p {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+.prob-info {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+    color: #475575;
+    text-shadow: 
+      0.4px 0.4px 0 white, 
+      -0.4px -0.4px 0 white, 
+      0.4px -0.4px 0 white, 
+      -0.4px 0.4px 0 white;
+    margin-bottom: 10px;
+}
+.container-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 100%;
+}
+.container-center img {
+    width: 340px;
+    height: 600px;
+}
+.char-description {
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    height: 50px;
+    background-color: rgba(113, 203, 255, 0.61);
+    bottom: 150px;
+    right: -100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.char-description h2 {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 
+      1px 1px 0 gray, 
+      -1px -1px 0 gray, 
+      1px -1px 0 gray, 
+      -1px 1px 0 gray;
+}
+.char-description .char-rarity {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ffd700, #fffacd, #ffdf00, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 25px;
+    transform: translateY(-3px);
+}
+.char-description div {
+    width: 70%;
+    height: 20px;
+    background-color: #38425d;
+    transform: translateY(-3px);
+}
+.char-sub-text {
+    text-align: center;
+    color: #d3bd8e;
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+}
+.container-right {
+    width: 450px;
 }
 /* card design */
 #trigger {
@@ -137,7 +349,7 @@ html, body {
 }
 
 .card-front {
-    background: url('../img/zoro-wano-bg.webp') center/cover no-repeat;
+    background: url('../img/') center/cover no-repeat;
     position: absolute;
     text-align: center;
     padding: 20px;
@@ -241,52 +453,4 @@ html, body {
 
 .is-flipped {
     transform: rotateY(180deg);
-}
-
-/* user design */
-
-.user {
-    width: 300px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.user-name {
-}
-.user-list {
-    display: flex;
-    flex-direction: column;
-}
-.user-item {
-}
-.user-materials-trigger {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.514);
-    cursor: pointer;
-    position: relative;
-}
-.user-materials-container {
-    position: absolute;
-    width: 200px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    left: -150%;
-    top: 50px;
-    background-color: rgba(129, 129, 129, 0.425);
-    z-index: 1;
-    cursor: default;
-}
-.user-materials-container.inactive {
-    display: none;
-}
-.user-materials-container.active {
-    display: flex;
-}
-.materials-list {
-}
-.materials-item {
 }

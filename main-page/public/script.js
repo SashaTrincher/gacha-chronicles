@@ -4,7 +4,7 @@
 fetch('http://localhost:3000/user')
     .then(response => response.json())
     .then(data => {
-        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;
+        document.getElementById('userCurrency').innerHTML = data.rubain;
         const matItems = document.querySelectorAll('.materials-item');
 
         matItems.forEach((matItem, index) => {
@@ -37,7 +37,7 @@ function addCurrency(value) {
     })
     .then(response => response.json())
     .then(data => { 
-        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`;  
+        document.getElementById('userCurrency').innerHTML = data.rubain;  
     });
 };
 
