@@ -423,6 +423,7 @@ const stepUpMilestones = {
 };
 
 let stepUpCount = 0;
+let pityCount = 0;
 
 app.get('/data/stepUpCount', (req, res) => {
     res.json(stepUpCount);
@@ -438,6 +439,22 @@ app.post('/data/removeStepUpCount', (req, res) => {
     const { value } = req.body;
     stepUpCount = 0;
     res.json({ stepUpCount: stepUpCount });
+});
+
+app.get('/data/pityCount', (req, res) => {
+    res.json(pityCount);
+});
+
+app.post('/data/addPityCount', (req, res) => {
+    const { value } = req.body;
+    pityCount += value;
+    res.json({ pityCount: pityCount });
+});
+
+app.post('/data/removePityUpCount', (req, res) => {
+    const { value } = req.body;
+    pityCount = 0;
+    res.json({ pityCount: pityCount });
 });
 
 app.get('/data/milestones', (req, res) => {

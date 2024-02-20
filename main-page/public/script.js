@@ -65,7 +65,8 @@ async function fetchData(dataType) {
         'cards': 'cards',
         'probabilities': 'probabilities',
         'stetUpMilestones': 'milestones', 
-        'stepUpCount': 'stepUpCount'
+        'stepUpCount': 'stepUpCount',
+        'pityCount': 'pityCount'
     };
 
     const endpoint = endpoints[dataType];
@@ -190,7 +191,55 @@ async function fetchData(dataType) {
     };
 
     // defines pityCount that will be updated at further functions
-    let pityCount = 0;
+    async function updatePityCount(action, value) {
+        const endpointMap = {
+            'add': 'addPityCount',
+            'remove': 'removePityCount'
+        };
+    
+        const endpoint = endpointMap[action];
+        if (!endpoint) {
+            console.error(`Invalid action: ${action}`);
+            return;
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:3000/data/${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value: value }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            await getStepUpCount(); 
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+    
+    async function getPityCount() {
+        return await (fetchData('pityCount'));
+    };
+
+    async function initiatePityUpdate(action, value) {
+        await updatePityCount(action, value); 
+        stepUpCount = await getPityCount(); 
+        console.log(stepUpCount); 
+    };
+
+    // step up system
+    let pityCount = await getPityCount();
+
+    const pityElement = document.getElementById('userPity').innerHTML = 0 || pityElementUpdate();
+    function pityElementUpdate() {
+        return pityCount;
+    };
     
     // defines rarityes that could be rolled
     const Rarity = {
@@ -220,6 +269,7 @@ async function fetchData(dataType) {
         }
 
         initiateStepUpUpdate('add', 1);
+        updatePityCount('add', 1);
     };
 
     // same as sr rarity card handling but with ssr
@@ -267,7 +317,6 @@ async function fetchData(dataType) {
             }
     
             const data = await response.json();
-            console.log(data);
             await getStepUpCount(); 
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);
@@ -282,7 +331,7 @@ async function fetchData(dataType) {
         await updateStepUpCount(action, value); 
         stepUpCount = await getStepUpCount(); 
         console.log(stepUpCount); 
-    }
+    };
 
     // step up system
     let stepUpCount = await getStepUpCount();
@@ -304,10 +353,11 @@ async function fetchData(dataType) {
     
                 if (probabilities.ssr <= rollData || probabilities.pityThreshold === pityCount) {
                     srHandling();
-                    console.log(`Step Up: ${stepUpCount}`);
+                    pityElementUpdate()
                     console.log(`Probabilities ${probabilities}`);
                 } else if (probabilities.sr + probabilities.ssr >= rollData) {
                     ssrHandling();
+                    pityElementUpdate()
                     await resetStepUp(); // Assuming resetStepUp is now async
                 } else {
                     throw new Error('Roll failed');
@@ -337,7 +387,7 @@ async function fetchData(dataType) {
     // reset function, usually is being triggers after rolling SSR card
     async function resetStepUp() {
         initiateStepUpUpdate('remove', stepUpCount); 
-        pityCount = 0;
+        updatePityCount('remove', pityCount);
         probabilities.ssr = 1;
         probabilities.sr = 99;
     };
