@@ -51,7 +51,7 @@ function removeCurrency(value) {
     })
     .then(response => response.json())
     .then(data => { 
-        document.getElementById('userCurrency').innerHTML = `Rubains: ${data.rubain}`; 
+        document.getElementById('userCurrency').innerHTML = data.rubain; 
     });
 };
 
@@ -133,6 +133,34 @@ async function fetchData(dataType) {
             return;
         };
     };
+    function handleAppChanges() {
+        const header = document.querySelector('.header');
+        const main = document.querySelector('.main');   
+        const cardBody = document.querySelector('.card-container');
+        const closeRoll = document.querySelector('.close-spin');
+
+        header.style.display = 'none';
+        main.style.display = 'none';
+        closeRoll.classList.replace('inactive', 'active');
+
+        closeRoll.addEventListener('click', () => {
+            cardBody.classList.replace('active', 'inactive');
+            header.style.display = 'flex';
+            main.style.display = 'flex';
+            closeRoll.classList.replace('active', 'inactive');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {             
+                cardBody.classList.replace('active', 'inactive');
+                header.style.display = 'flex';
+                main.style.display = 'flex';
+                closeRoll.classList.replace('active', 'inactive');
+            };
+        });
+    };
+    
+
 
     // function to run through the array with ssr rairty cards and find card with corresponding givenId (id of a card)
     function findSsrCardById(givenId) {
@@ -235,10 +263,7 @@ async function fetchData(dataType) {
     // step up system
     let pityCount = await getPityCount();
 
-    const pityElement = document.getElementById('userPity').innerHTML = 0 || pityElementUpdate();
-    function pityElementUpdate() {
-        return pityCount;
-    };
+    
     
     // defines rarityes that could be rolled
     const Rarity = {
@@ -261,6 +286,7 @@ async function fetchData(dataType) {
         const srCardIds = getCardIds(Rarity.SR);
 
         handleCardSelection(srCardIds, Rarity.SR);
+        handleAppChanges();
 
         if (cardRarity.classList.contains('ssr') || cardRarity.classList.contains('ur')) {
             cardRarity.classList.remove('ssr');
@@ -278,12 +304,12 @@ async function fetchData(dataType) {
         const ssrCardIds = getCardIds(Rarity.SSR);
 
         handleCardSelection(ssrCardIds, Rarity.SSR);
+        handleAppChanges();
 
         if (cardRarity.classList.contains('sr') || cardRarity.classList.contains('ur')) {
             cardRarity.classList.remove('sr');
-            cardRarity.classList.remove('ur')
+            cardRarity.classList.remove('ur');
         }
-
         resetStepUp();
     };
 
@@ -352,11 +378,9 @@ async function fetchData(dataType) {
     
                 if (probabilities.ssr <= rollData || probabilities.pityThreshold === pityCount) {
                     srHandling();
-                    pityElementUpdate()
                     console.log(`Probabilities ${probabilities}`);
                 } else if (probabilities.sr + probabilities.ssr >= rollData) {
                     ssrHandling();
-                    pityElementUpdate()
                     await resetStepUp(); 
                 } else {
                     throw new Error('Roll failed');

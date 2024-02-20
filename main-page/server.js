@@ -1,3 +1,5 @@
+// © 2024 Trincher Oleksandr
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -451,7 +453,7 @@ app.post('/data/addPityCount', (req, res) => {
     res.json({ pityCount: pityCount });
 });
 
-app.post('/data/removePityUpCount', (req, res) => {
+app.post('/data/removePityCount', (req, res) => {
     const { value } = req.body;
     pityCount = 0;
     res.json({ pityCount: pityCount });

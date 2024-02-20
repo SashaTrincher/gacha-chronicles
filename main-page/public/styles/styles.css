@@ -23,6 +23,41 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    position: relative;
+}
+.body-card {
+    position: absolute;
+    top: 30%;
+    left: 45%;
+}
+.close-spin.inactive {
+    display: none;
+}
+body .close-spin {
+    width: 40px;
+    height: 40px;
+    background-color: #ffeed5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 50px;
+    cursor: pointer;
+    border: 4px solid gray;
+    transition: all .3s;
+    position: absolute;
+    right: 100px;
+    top: 50px;
+}
+.close-spin:hover {
+    background-color: gray;
+    border: 2px solid #ffeed5;
+}
+.close-spin p {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 1000;
 }
 .active {
     display: flex;
@@ -37,7 +72,7 @@ body {
     align-items: center;
     width: 100%;
     height: 125px;
-    margin: 20px 0 20px 0;
+    margin: 20px 0 0 0;
 }
 .user {
     width: 110px;
@@ -156,7 +191,7 @@ body {
 
 /* main */
 .main {
-    margin-top: 200px;
+    margin-top: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -409,6 +444,93 @@ body {
 }
 .wish-amount.sufficient {
     color: #b5a08d;
+}
+/* shop */
+.shop-container.inactive {
+    display: none;
+}
+.shop-container.active {
+    padding-top: 40px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: #3b3737b0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.shop-top {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.close-shop {
+    width: 40px;
+    height: 40px;
+    background-color: #ffeed5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 50px;
+    cursor: pointer;
+    border: 4px solid gray;
+    transition: all .3s;
+}
+.close-shop:hover {
+    background-color: gray;
+    border: 2px solid #ffeed5;
+}
+.close-shop p {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 1000;
+}
+.shop-items {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4%;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.shop-item {
+    background-image: url('../img/shop-banner.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    transition: all .3s;
+    cursor: pointer;
+}
+.shop-item:hover {
+    transform: scale(1.1);
+}
+.shop-amount {
+    color: #3a4154;
+    font-family: "Namdhinggo", serif;
+    font-weight: 800;
+    font-size: 30px;
+    transform: translateY(-40px);
+}
+.shop-currency {
+    color: #3a4154;
+    font-family: "Namdhinggo", serif;
+    font-weight: 800;
+    font-size: 30px;
+    transform: translateY(-16px);
 }
 /* card design */
 #trigger {
