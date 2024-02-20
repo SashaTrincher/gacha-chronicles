@@ -25,7 +25,6 @@ fetch('http://localhost:3000/user')
     .catch(error => {
         console.error('Error fetching user data:', error);
     });
-
 // function to add currency (Rubain)
 function addCurrency(value) {
     fetch('http://localhost:3000/user/addRubain', {
@@ -58,7 +57,7 @@ function removeCurrency(value) {
 
 
 // dom elements 
-const trigger = document.getElementById('trigger');
+const pullTrigger = document.getElementById('wishTrigger');
 
 async function fetchData(dataType) {
     const endpoints = {
@@ -358,12 +357,12 @@ async function fetchData(dataType) {
                 } else if (probabilities.sr + probabilities.ssr >= rollData) {
                     ssrHandling();
                     pityElementUpdate()
-                    await resetStepUp(); // Assuming resetStepUp is now async
+                    await resetStepUp(); 
                 } else {
                     throw new Error('Roll failed');
                 };
     
-                removeCurrency(value); // Ensure this is handled correctly if asynchronous
+                removeCurrency(value); 
             } else {
                 alert(`You don't have enough Rubain. Your current Rubain amount is: ${userData.rubain}`);
             }
@@ -372,7 +371,7 @@ async function fetchData(dataType) {
         }
     };
 
-    trigger.addEventListener('click', () => {
+    pullTrigger.addEventListener('click', () => {
         buyCard(150);
     })
 

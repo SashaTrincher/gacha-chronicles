@@ -15,6 +15,7 @@
 html, body {
     width: 100%;
     height: 100%; 
+    overflow: hidden;
 }
 body {
     background-image: url('../img/page-bg.webp');
@@ -124,6 +125,10 @@ body {
     height: 23px;
     background-color: #ffeed5;
     border-radius: 50%;
+    transition: all .3s;
+}
+.currencyRedirect:hover {
+    background-color: #cec6ba;
 }
 .pity {
     display: flex;
@@ -139,6 +144,7 @@ body {
     width: 27px;
     height: 95%;
     margin-right: 3px;
+    transform: translateX(-8px);
 }
 .pity-currency {
     text-align: center;
@@ -170,13 +176,6 @@ body {
     align-items: center;
     position: relative;
 }
-/* h3 {
-    text-shadow: 
-      0.8px 0.8px 0 white, 
-      -0.8px -0.8px 0 white, 
-      0.8px -0.8px 0 white, 
-      -0.8px 0.8px 0 white;
-} */
 .container-promote {
     background-color: #3c7dc4;
     border-radius: 20px 0 20px 20px;
@@ -322,6 +321,94 @@ body {
 }
 .container-right {
     width: 450px;
+}
+/* main-footer */
+.footer-container {
+    margin-top: 100px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-left {
+    display: flex;
+    height: 100%;
+    width: 450px;
+    gap: 40px;
+    margin-left: 100px;
+}
+.footer-offers {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e3e1d5;
+    width: 130px;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(128, 128, 128, 0.199);
+    box-shadow: 0 0 10px 3px rgba(128, 128, 128, 0.199);
+    transition: all .3s;
+}
+.footer-offers:hover {
+    background-color: #d6d2c3;
+}
+.footer-offers p {
+    font-family: "Namdhinggo", serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: #3a4154;
+}
+.footer-right {
+    transform: translateY(-38px);
+    margin-right: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wish-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 250px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-image: url('../img/summon-img.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    overflow: hidden;
+}
+.wish-button h3 {
+    font-family: "Namdhinggo", serif;
+    font-weight: 800;
+    color: #b5a08d;
+    font-size: 24px;
+}
+.wish-button div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wish-button img {
+    width: 23px;
+    height: 23px;
+}
+.wish-amount {
+    font-family: "Namdhinggo", serif;
+    font-weight: 800;
+    font-size: 20px;
+    margin-left: 5px;
+}
+.wish-amount.insufficient {
+    color: #fe5d40;
+}
+.wish-amount.sufficient {
+    color: #b5a08d;
 }
 /* card design */
 #trigger {
