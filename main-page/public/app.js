@@ -117,7 +117,8 @@ gameOffers.forEach((gameOffer, index) => {
 
 const moduleCancel = document.getElementById('warningCncl');
 const moduleAccept = document.getElementById('warningAcc');
-const warningContainer = document.querySelector('.warning-container')
+const warningContainer = document.querySelector('.warning-container');
+let error = false;
 
 moduleCancel.addEventListener('click', () => {
     warningContainer.classList.replace('active', 'inactive');
@@ -147,6 +148,7 @@ async function fetchData(dataType) {
         const response = await fetch(`http://localhost:3000/data/${endpoint}`);
         if (!response.ok) {
             throw new Error(`Error fetching ${dataType}: Network response was not ok`);
+            error = true;
         }
         return await response.json();
     } catch (error) {
@@ -174,7 +176,11 @@ window.addEventListener('load', () => {
     fetchUser();
     updatePity();
 });
-setInterval(() => {
-    fetchUser();
-    updatePity();
-}, 500);
+if (error === false) {
+    setInterval(() => {
+        fetchUser();
+        updatePity();
+    }, 500);
+} else {
+    return
+}
