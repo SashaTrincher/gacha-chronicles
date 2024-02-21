@@ -159,8 +159,10 @@ async function fetchData(dataType) {
             };
         });
     };
-    function warningTrigger() {
+    function warningTrigger(missAmount) {
         const warningContainer = document.querySelector('.warning-container');
+        const missingAmount = document.getElementById('missing-vcurrency');
+        missingAmount.innerHTML = 0 || missAmount;
         warningContainer.classList.replace('inactive', 'active');
     };
     
@@ -389,8 +391,9 @@ async function fetchData(dataType) {
     
                 removeCurrency(value); 
             } else {
-                warningTrigger();
-                console.log('triggered');
+                let missAmount = value - userData.rubain;
+                console.log(missAmount);
+                warningTrigger(missAmount);
             }
         } catch (error) {
             console.error('Error in buyCard operation:', error);
