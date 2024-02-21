@@ -115,6 +115,19 @@ gameOffers.forEach((gameOffer, index) => {
     });
 });
 
+const moduleCancel = document.getElementById('warningCncl');
+const moduleAccept = document.getElementById('warningAcc');
+const warningContainer = document.querySelector('.warning-container')
+
+moduleCancel.addEventListener('click', () => {
+    warningContainer.classList.replace('active', 'inactive');
+});
+
+moduleAccept.addEventListener('click', () => {
+    shopContainer.classList.replace('inactive', 'active');
+    warningContainer.classList.replace('active', 'inactive');
+});
+
 async function fetchData(dataType) {
     const endpoints = {
         'cards': 'cards',
@@ -164,4 +177,4 @@ window.addEventListener('load', () => {
 setInterval(() => {
     fetchUser();
     updatePity();
-}, 1000);
+}, 500);

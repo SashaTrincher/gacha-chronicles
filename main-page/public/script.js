@@ -159,9 +159,11 @@ async function fetchData(dataType) {
             };
         });
     };
+    function warningTrigger() {
+        const warningContainer = document.querySelector('.warning-container');
+        warningContainer.classList.replace('inactive', 'active');
+    };
     
-
-
     // function to run through the array with ssr rairty cards and find card with corresponding givenId (id of a card)
     function findSsrCardById(givenId) {
 
@@ -314,7 +316,8 @@ async function fetchData(dataType) {
     };
 
     // probabilities for cards
-    const probabilities = await (fetchData('probabilities'));
+    let probabilities = await (fetchData('probabilities'));
+
 
     async function updateStepUpCount(action, value) {
         const endpointMap = {
@@ -369,7 +372,6 @@ async function fetchData(dataType) {
             const userResponse = await fetch('http://localhost:3000/user');
             const userData = await userResponse.json();
     
-            console.log(`Prob SSR: ${probabilities.ssr}. Prob SR: ${probabilities.sr}`);
             if (userData.rubain >= value) {
                 adjustProbabilitiesForStepUp();
     
@@ -378,7 +380,6 @@ async function fetchData(dataType) {
     
                 if (probabilities.ssr <= rollData || probabilities.pityThreshold === pityCount) {
                     srHandling();
-                    console.log(`Probabilities ${probabilities}`);
                 } else if (probabilities.sr + probabilities.ssr >= rollData) {
                     ssrHandling();
                     await resetStepUp(); 
@@ -388,7 +389,8 @@ async function fetchData(dataType) {
     
                 removeCurrency(value); 
             } else {
-                alert(`You don't have enough Rubain. Your current Rubain amount is: ${userData.rubain}`);
+                warningTrigger();
+                console.log('triggered');
             }
         } catch (error) {
             console.error('Error in buyCard operation:', error);
@@ -411,8 +413,7 @@ async function fetchData(dataType) {
     async function resetStepUp() {
         initiateStepUpUpdate('remove', stepUpCount); 
         updatePityCount('remove', pityCount);
-        probabilities.ssr = 1;
-        probabilities.sr = 99;
+        probabilities = await (fetchData('probabilities'));
     };
 
     // function to set cards array to localStorage

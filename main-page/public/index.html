@@ -21,9 +21,40 @@
     </script>
 </head>
 <body>
+    <div class="shop-container inactive">
+        <div class="shop-top">
+            <div class="close-shop"><p>×</p></div>
+        </div>
+        <div class="shop-items">
+            <div class="shop-item">
+                <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
+                <p class="shop-currency">€0.99</p>
+            </div>
+            <div class="shop-item">
+                <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
+                <p class="shop-currency">€0.99</p>
+            </div>
+            <div class="shop-item">
+                <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
+                <p class="shop-currency">€0.99</p>
+            </div>
+            <div class="shop-item">
+                <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
+                <p class="shop-currency">€0.99</p>
+            </div>
+            <div class="shop-item">
+                <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
+                <p class="shop-currency">€0.99</p>
+            </div>
+            <div class="shop-item">
+                <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
+                <p class="shop-currency">€0.99</p>
+            </div>
+        </div>
+    </div>
     <div class="close-spin inactive"><p>×</p></div>
     <div class="body-card">
-        <div class="card-container inactive">
+        <div class="card-container inactive" id="warningModule">
             <div class="card">
                 <div class="card-front">
                     <div class="character-image active">
@@ -45,7 +76,7 @@
     <header class="header">
         <div class="user">
             <img class="user-img" src="./img/stars.png">
-            <a href="#" class="user-name" id="userName">user</a>
+            <a href="#" class="user-name" id="userName">User</a>
         </div>
         <div class="banners">
             <div class="banner" id="banner">
@@ -68,6 +99,14 @@
     </header>
 
     <main class="main">
+        <div class="warning-container inactive">
+            <h2 class="warning-title">Shop Offer</h2>
+            <p class="warning-expl">An additional <span id="missing-vcurrency">150</span> Rubains is needed. <br> Want to purchase some Rubains?</p>
+            <div class="warning-options">
+                <div class="warning-choices" id="warningCncl">Cancel</div>
+                <div class="warning-choices" id="warningAcc">Confirm</div>
+            </div>
+        </div>
         <div class="main-container">
             <div class="container-promote">
                 <p>Character Event Wish</p>
@@ -107,37 +146,6 @@
                         <img src="./img/rubain-img.png" alt="">
                         <p class="wish-amount insufficient" id="spinAmount">×150</p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="shop-container inactive">
-            <div class="shop-top">
-                <div class="close-shop"><p>×</p></div>
-            </div>
-            <div class="shop-items">
-                <div class="shop-item">
-                    <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
-                    <p class="shop-currency">€0.99</p>
-                </div>
-                <div class="shop-item">
-                    <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
-                    <p class="shop-currency">€0.99</p>
-                </div>
-                <div class="shop-item">
-                    <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
-                    <p class="shop-currency">€0.99</p>
-                </div>
-                <div class="shop-item">
-                    <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
-                    <p class="shop-currency">€0.99</p>
-                </div>
-                <div class="shop-item">
-                    <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
-                    <p class="shop-currency">€0.99</p>
-                </div>
-                <div class="shop-item">
-                    <h2 class="shop-amount"><span class="currencyAmount"></span> Rubains</h2>
-                    <p class="shop-currency">€0.99</p>
                 </div>
             </div>
         </div>
