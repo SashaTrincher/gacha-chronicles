@@ -182,5 +182,5 @@ if (error === false) {
         updatePity();
     }, 500);
 } else {
-    return
+    console.log('error');
 }
