@@ -2,41 +2,14 @@
 
 const express = require('express');
 const cors = require('cors');
-const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const rateLimit = require('express-rate-limit');
-const csrf = require('csurf');
-const Joi = require('joi');
-const helmet = require('helmet');
-
 const app = express();
 const port = 3000;
 
-// Middleware
 app.use(cors());
-app.use(express.json());
-app.use(helmet()); // Adds basic security headers
+app.use(express.json());  
 
-// Rate Limiting
-const apiLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: "Too many requests, please try again later."
-});
-
-app.use('/user/', apiLimiter);
-
-// CSRF Protection
-const csrfProtection = csrf({ cookie: true });
-app.use(csrfProtection);
-
-// User Data
 let userData = {
     username: 'Alex',
-    password: bcrypt.hashSync('password', 10), // hashed password
     rubain: 0,
     materials: {
         green: 0,
@@ -46,59 +19,18 @@ let userData = {
     }
 };
 
-// JWT Configuration
-const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'your_jwt_secret'
-};
-
-// JWT Strategy
-passport.use(new JwtStrategy(jwtOptions, (jwt_payload, done) => {
-    if (jwt_payload.username === userData.username) {
-        return done(null, userData);
-    } else {
-        return done(null, false);
-    }
-}));
-
-app.use(passport.initialize());
-
-// Authentication Middleware
-const authenticate = passport.authenticate('jwt', { session: false });
-
-// Routes
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    if (username === userData.username && bcrypt.compareSync(password, userData.password)) {
-        const token = jwt.sign({ username: userData.username }, jwtOptions.secretOrKey);
-        res.json({ token });
-    } else {
-        res.status(401).json({ message: 'Invalid credentials' });
-    }
-});
-
-app.get('/user', authenticate, (req, res) => {
+app.get('/user', (req, res) => {
     res.json(userData);
 });
 
-const rubainSchema = Joi.object({
-    value: Joi.number().integer().min(0).required()
-});
-
-app.post('/user/addRubain', authenticate, (req, res) => {
-    const { error, value } = rubainSchema.validate(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
+app.post('/user/addRubain', (req, res) => {
+    const { value } = req.body;
     userData.rubain += value;
     res.json({ rubain: userData.rubain });
 });
 
-app.post('/user/removeRubain', authenticate, (req, res) => {
-    const { error, value } = rubainSchema.validate(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
+app.post('/user/removeRubain', (req, res) => {
+    const { value } = req.body;
     userData.rubain -= value;
     res.json({ rubain: userData.rubain });
 });
