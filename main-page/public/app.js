@@ -16,7 +16,7 @@
 // });
 
 async function fetchUser() {
-    const userResponse = await fetch('http://localhost:3000/user');
+    const userResponse = await fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/user');
     const userData = await userResponse.json();
 
     const rollCost = document.getElementById('spinAmount');
@@ -37,7 +37,7 @@ function fetchAllAmounts() {
 const allShopAmounts = fetchAllAmounts();
 
 function addCurrency(value) {
-    fetch('http://localhost:3000/user/addRubain', {
+    fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/user/addRubain', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -47,6 +47,10 @@ function addCurrency(value) {
     .then(response => response.json())
     .then(data => { 
         document.getElementById('userCurrency').innerHTML = data.rubain;  
+    })
+    .catch(error => {
+        console.error('Error fetching user data:', error);
+        document.getElementById('userCurrency').innerHTML = error;
     });
 };
 
@@ -145,7 +149,7 @@ async function fetchData(dataType) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/data/${endpoint}`);
+        const response = await fetch(`https://afxvjdv857.eu-west-3.awsapprunner.com/data/${endpoint}`);
         if (!response.ok) {
             throw new Error(`Error fetching ${dataType}: Network response was not ok`);
             error = true;

@@ -1,7 +1,7 @@
 // © 2024 Trincher Oleksandr
 
 // fetching user data
-fetch('http://localhost:3000/user')
+fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/user')
     .then(response => response.json())
     .then(data => {
         document.getElementById('userCurrency').innerHTML = data.rubain;
@@ -27,7 +27,7 @@ fetch('http://localhost:3000/user')
     });
 // function to add currency (Rubain)
 function addCurrency(value) {
-    fetch('http://localhost:3000/user/addRubain', {
+    fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/user/addRubain', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function addCurrency(value) {
 
 // function to remove currency (Rubain)
 function removeCurrency(value) {
-    fetch('http://localhost:3000/user/removeRubain', {
+    fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/user/removeRubain', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ async function fetchData(dataType) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/data/${endpoint}`);
+        const response = await fetch(`https://afxvjdv857.eu-west-3.awsapprunner.com/data/${endpoint}`);
         if (!response.ok) {
             throw new Error(`Error fetching ${dataType}: Network response was not ok`);
         }
@@ -235,7 +235,7 @@ async function fetchData(dataType) {
         }
     
         try {
-            const response = await fetch(`http://localhost:3000/data/${endpoint}`, {
+            const response = await fetch(`https://afxvjdv857.eu-west-3.awsapprunner.com/data/${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -334,7 +334,7 @@ async function fetchData(dataType) {
         }
     
         try {
-            const response = await fetch(`http://localhost:3000/data/${endpoint}`, {
+            const response = await fetch(`https://afxvjdv857.eu-west-3.awsapprunner.com/data/${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -371,13 +371,13 @@ async function fetchData(dataType) {
     // function to roll a card
     async function buyCard(value) {
         try {
-            const userResponse = await fetch('http://localhost:3000/user');
+            const userResponse = await fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/user');
             const userData = await userResponse.json();
     
             if (userData.rubain >= value) {
                 adjustProbabilitiesForStepUp();
     
-                const rollResponse = await fetch('http://localhost:3000/roll/chanceRoll');
+                const rollResponse = await fetch('https://afxvjdv857.eu-west-3.awsapprunner.com/roll/chanceRoll');
                 const rollData = await rollResponse.json();
     
                 if (probabilities.ssr <= rollData || probabilities.pityThreshold === pityCount) {
